@@ -1,0 +1,8 @@
+FROM archlinux
+
+RUN pacman -Syu --noconfirm
+RUN pacman -S --noconfirm --needed \
+        base-devel \
+        python python-pip \
+        pypy pypy3
+

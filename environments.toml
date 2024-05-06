@@ -1,0 +1,57 @@
+[[repos]]
+base = 'quay.io/python-environments'
+
+[[images]]
+name = 'debian'
+version = '10'
+template.name = 'debian'
+template.data = { has-pypy2 = true, has-distutils = true }
+
+[[images]]
+name = 'debian'
+version = '11'
+template.name = 'debian'
+template.data = { has-pypy2 = true, has-distutils = true }
+
+[[images]]
+name = 'debian'
+version = '12'
+template.name = 'debian'
+template.data = { has-distutils = true }
+
+[[images]]
+name = 'ubuntu'
+version = '20.04'
+template.name = 'debian'
+template.data = { has-pypy2 = true, has-distutils = true }
+
+[[images]]
+name = 'ubuntu'
+version = '22.04'
+template.name = 'debian'
+template.data = { has-pypy2 = true, has-distutils = true }
+
+[[images]]
+name = 'ubuntu'
+version = '24.04'
+template.name = 'debian'
+
+[[images]]
+name = 'fedora'
+version = '38'
+template.name = 'fedora'
+
+[[images]]
+name = 'fedora'
+version = '39'
+template.name = 'fedora'
+
+[[images]]
+name = 'fedora'
+version = '40'
+template.name = 'fedora'
+
+[[images]]
+name = 'archlinux'
+version.type = 'rolling'
+template.name = 'archlinux'

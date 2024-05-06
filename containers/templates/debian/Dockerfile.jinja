@@ -1,0 +1,12 @@
+FROM {{ image }}:{{ version }}
+
+RUN apt-get update
+RUN apt-get install -y \
+        python3 python3-venv python3-pip \
+{% if has_distutils %}
+        python3-distutils \
+{% endif %}
+{% if has_pypy2 %}
+        pypy \
+{% endif %}
+        pypy3
