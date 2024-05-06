@@ -1,0 +1,41 @@
+[build-system]
+build-backend = 'mesonpy'
+requires = [
+    'meson-python',
+    'Jinja2',
+    'typing_validation',
+    'docker',
+    'exceptiongroup; python_version < "3.11"',
+    'typing_extensions; python_version < "3.11"',
+    # typing_validation has a undeclared hard dependency on typing_extensions
+    # See https://github.com/hashberg-io/typing-validation/pull/20
+    'typing_extensions',
+]
+
+[project]
+name = 'python-environments'
+version = '0.0.0'
+description = 'Collection of description files for common Python environments'
+readme = 'README.md'
+requires-python = '>= 3.9'
+license = { file = 'LICENSES/MIT.txt' }
+maintainers = [
+    { name = 'Filipe Laíns', email = 'lains@riseup.net' },
+]
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Developers',
+    'Programming Language :: Python',
+    'Topic :: Software Development :: Build Tools',
+]
+
+[project.optional-dependencies]
+test = [
+    'pytest',
+    'typing-validation',
+]
+docs = [
+    'sphinx ~= 7.0',
+    'sphinx-material ~= 0.0.36',
+    'sphinx-toolbox >= 3.0.0',
+]
