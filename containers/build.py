@@ -6,6 +6,7 @@ from collections.abc import Iterator
 
 import containers
 import containers.concurrent
+import containers.env
 import containers.ops
 
 
@@ -21,6 +22,7 @@ class Builder:
         self._repos = repos
         self._srcdir = srcdir
         self._logdir = logdir
+        self._env_info = containers.env.environment_info()
 
     def _docker_client(self, image: containers.Image) -> containers.ops.DockerClient:
         logfile = self._logdir / f'{image.id}.log'
@@ -41,7 +43,11 @@ class Builder:
             containers.concurrent.Task(
                 userdata=image,
                 fn=self._docker_client(image).build,
-                args=(self._srcdir / image.id, image.tags + self._repo_tags(image)),
+                args=(
+                    self._srcdir / image.id,
+                    image.tags + self._repo_tags(image),
+                    self._env_info,
+                ),
             )
             for image in self._images
         ])

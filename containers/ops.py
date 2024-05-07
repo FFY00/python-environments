@@ -3,7 +3,7 @@ import pathlib
 import shutil
 import subprocess
 
-from collections.abc import Callable, Collection
+from collections.abc import Callable, Collection, Mapping
 
 
 SubprocessRunnerType = Callable[[str, ...], bytes]
@@ -47,8 +47,14 @@ class DockerClient:
     def _run(self, *args: str) -> str:
         return self._runner([self._client, *args])
 
-    def build(self, path: pathlib.Path, tags: Collection[str]) -> None:
-        self._run('buildx', 'build', os.fspath(path), *[f'--tag={tag}' for tag in tags])
+    def build(self, path: pathlib.Path, tags: Collection[str], labels: Mapping[str, str]) -> None:
+        self._run(
+            'buildx',
+            'build',
+            os.fspath(path),
+            *[f'--tag={tag}' for tag in tags],
+            *[f'--label={name}={value}' for name, value in labels.items()],
+        )
 
     def push(self, name: str) -> None:
         self._run('push', name)
