@@ -26,7 +26,6 @@ SOURCE_MOUNT = docker.types.Mount(
 def generate_image_data(tag: str, out: pathlib.Path) -> None:
     out.parent.mkdir(exist_ok=True, parents=True)
     docker_client = docker.from_env()
-    docker_client.images.pull(tag)
     raw_introspection_data = docker_client.containers.run(
         image=tag,
         command=['/usr/bin/python3', '-m', 'python_environments.generate'],
@@ -62,10 +61,7 @@ def main() -> None:
         containers.concurrent.Task(
             userdata=image,
             fn=generate_image_data,
-            args=(
-                 f'{config.repos[0].base}/{image.id}',
-                args.outdir / f'{image.id}.json',
-            ),
+            args=(image.id, args.outdir / f'{image.id}.json'),
         )
         for image in target_images
     ]
