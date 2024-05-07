@@ -1,0 +1,13 @@
+details.datadetails {
+    border-color: #9e9e9e;
+}
+
+details.datadetails>summary {
+    border-bottom-color: hsla(0,0%,62%,.1);
+    background-color: hsla(0,0%,62%,.1);
+}
+
+details.datadetails>summary:before {
+    color: #9e9e9e;
+    content: "";
+}

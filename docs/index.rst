@@ -25,4 +25,10 @@ Available Images
 .. imagelist::
 
 
+.. toctree::
+    :hidden:
+
+    image-data
+
+
 .. _quay.io: https://quay.io
