@@ -25,6 +25,14 @@ Available Images
 .. imagelist::
 
 
+More Information
+================
+
+You can find information about each image on the on the :ref:`image-data` page,
+and documentation for the supporting Python module on the :ref:`python-package`
+page.
+
+
 .. toctree::
     :hidden:
 
