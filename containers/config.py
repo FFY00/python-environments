@@ -93,12 +93,16 @@ class Config:
 
         try:
             import typing_validation
+            import typing_validation.validation
         except ModuleNotFoundError as e:
             if e.name != 'typing_validation':
                 raise
             warnings.warn('the typing_validation package is not available, skiping environments.toml validation')
         else:
-            typing_validation.validate(data, ConfigDict)
+            try:
+                typing_validation.validate(data, ConfigDict)
+            except typing_validation.validation.UnsupportedTypeError as e:
+                warnings.warn(f'got UnsupportedTypeError during environments.toml validation: {e}')
 
         return cls(
             repos=[containers.Repo(entry['base']) for entry in data['repos']],
