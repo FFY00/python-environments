@@ -25,7 +25,7 @@ class Builder:
         self._env_info = containers.env.environment_info()
 
     def _docker_client(self, image: containers.Image) -> containers.ops.DockerClient:
-        logfile = self._logdir / f'{image.id}.log'
+        logfile = self._logdir / f'{image.name}-{image.version}.log'
         runner = containers.ops.logging_subprocess_runner(logfile)
         return containers.ops.DockerClient(runner)
 
