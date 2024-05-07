@@ -5,6 +5,7 @@ requires = [
     'Jinja2',
     'typing_validation',
     'docker',
+    'tomli; python_version < "3.11"',
     'exceptiongroup; python_version < "3.11"',
     'typing_extensions; python_version < "3.11"',
     # typing_validation has a undeclared hard dependency on typing_extensions

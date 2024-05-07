@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import dataclasses
 import pathlib
-import tomllib
 import sys
 import warnings
 
@@ -12,8 +11,12 @@ import containers
 
 
 if sys.version_info >= (3, 11):
+    import tomllib
+
     from typing import Required, Self
 else:
+    import tomli as tomllib
+
     from typing_extensions import Required, Self
 
 

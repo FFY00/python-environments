@@ -1,6 +1,11 @@
 import pathlib
 import sys
-import tomllib
+
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:
+    import tomli as tomllib
 
 
 ROOT = pathlib.Path(__file__).parent.parent
