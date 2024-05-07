@@ -29,6 +29,7 @@ Available Images
     :hidden:
 
     image-data
+    python-package
 
 
 .. _quay.io: https://quay.io

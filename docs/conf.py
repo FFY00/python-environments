@@ -15,6 +15,7 @@ author = 'Filipe Laíns'
 version = release = containers.__version__
 
 extensions = [
+    'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx_toolbox.collapse',
     'local_project_info',
