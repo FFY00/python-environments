@@ -7,7 +7,20 @@ py.install_sources(
     subdir: 'python_environments',
 )
 
-run_command(py, '-m', 'containers.build', check: false)
+if get_option('build_containers')
+    build_containers_target = custom_target(
+        'build-containers',
+        output: 'dummy',
+        command: [py, '-m', 'containers.build'],
+        env: {
+            'PYTHONPATH': meson.source_root(),
+        },
+        console: true,
+    )
+    generate_data_deps = [build_containers_target]
+else
+    generate_data_deps = []
+endif
 
 data_files = run_command(py, 'generate-data.py', '--list-files', check: true).stdout().strip().split(' ')
 custom_target(
@@ -17,4 +30,5 @@ custom_target(
     command: [py, '@INPUT@', '--outdir', '@OUTDIR@'],
     install_dir: py.get_install_dir() / 'python_environments' / 'data',
     install: true,
+    depends: generate_data_deps,
 )
