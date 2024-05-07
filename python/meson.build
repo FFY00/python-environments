@@ -7,11 +7,17 @@ py.install_sources(
     subdir: 'python_environments',
 )
 
+if get_option('push_containers')
+    build_containers_command = [py, '-m', 'containers.build', '--push']
+else
+    build_containers_command = [py, '-m', 'containers.build']
+endif
+
 if get_option('build_containers')
     build_containers_target = custom_target(
         'build-containers',
         output: 'dummy',
-        command: [py, '-m', 'containers.build'],
+        command: build_containers_command,
         env: {
             'PYTHONPATH': meson.source_root(),
         },
