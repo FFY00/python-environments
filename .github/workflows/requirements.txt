@@ -1,0 +1,7 @@
+# build
+Jinja2
+docker
+# docs
+sphinx ~= 7.0
+sphinx-material
+sphinx-toolbox
