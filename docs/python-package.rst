@@ -59,7 +59,7 @@ Index
 
 
         data = importlib.resources.files(python_environments.data)
-        data.joinpath('debian:10').read_text()
+        data.joinpath('debian:10.json').read_text()
 
 
 :py:mod:`python_environments.generate`
