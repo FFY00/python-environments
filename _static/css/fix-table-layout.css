@@ -1,0 +1,45 @@
+/* datatable */
+
+.datatable .md-typeset__table {
+    width: 100%;
+    max-height: 1000px;
+}
+
+.datatable td:first-child {
+    white-space: nowrap;
+}
+
+.datatable td:nth-child(2) {
+    width: 100%;
+}
+
+.datatable table:not([class]) td {
+    vertical-align: middle;
+    padding: 0 .8rem;
+    min-width: 200px;
+}
+
+.datatable table:not([class]) th:not([align]) {
+    text-align: center;
+}
+
+/* datadetail dropdown tables */
+
+details.datadetails {
+    display: block;
+}
+
+details.datadetails .md-typeset__scrollwrap {
+    max-height: 600px;
+}
+
+details.datadetails td {
+    padding: 0 .3rem;
+    max-width: 50%;
+}
+
+/* Other tables */
+
+.md-typeset table:not([class]) td {
+    vertical-align: middle;
+}
