@@ -39,6 +39,7 @@ jobs:
           git config --global --add safe.directory ${{ github.workspace }}
           python -m build \
               -Csetup-args=-Dpush_containers=true \
+              -Csetup-args=-Dcontainers_build_path=${{ github.workspace }}/containers/out \
               -Cbuilddir=builddir
       - uses: pypa/gh-action-pypi-publish@release/v1
       - uses: actions/upload-artifact@v4
