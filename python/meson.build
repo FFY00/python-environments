@@ -7,12 +7,12 @@ py.install_sources(
     subdir: 'python_environments',
 )
 
+build_containers_command = [py, '-m', 'containers.build']
 if get_option('push_containers')
-    build_containers_command = [py, '-m', 'containers.build', '--push']
-else
-    build_containers_command = [py, '-m', 'containers.build']
+    build_containers_command += ['--push']
 endif
 
+generate_data_deps = []
 if get_option('build_containers')
     build_containers_target = custom_target(
         'build-containers',
@@ -23,9 +23,7 @@ if get_option('build_containers')
         },
         console: true,
     )
-    generate_data_deps = [build_containers_target]
-else
-    generate_data_deps = []
+    generate_data_deps += [build_containers_target]
 endif
 
 data_files = run_command(py, 'generate-data.py', '--list-files', check: true).stdout().strip().split(' ')
