@@ -4,6 +4,7 @@ import pathlib
 import shutil
 import sys
 import zipfile
+import time
 
 import github
 import requests
@@ -38,10 +39,33 @@ def find_artifact(name: str, commit: str) -> github.Artifact.Artifact | None:
     return None
 
 
+def find_artifact(
+    run_name: str,
+    artifact_name: str,
+    commit: str,
+    timeout: int | None = None,
+) -> github.Artifact.Artifact | None:
+    github_client = github.Github(auth=github.Auth.Token(os.environ.get('GITHUB_TOKEN')))
+    repo = github_client.get_repo('FFY00/python-environments')
+
+    for run in repo.get_workflow_runs(head_sha=commit):
+        if run.name == run_name:
+            break
+
+    for i in range(timeout or 1):
+        if i != 0:
+            time.sleep(1)
+        for artifact in run.get_artifacts():
+            if artifact.name == artifact_name:
+                return artifact
+    return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument('--outdir', type=pathlib.Path, default=containers.PYTHON_PATH / '.data')
     parser.add_argument('--commit', default=None)
+    parser.add_argument('--timeout', type=int, default=None)
     args = parser.parse_args()
 
     commit = args.commit or containers.env.get_commit()
@@ -54,7 +78,7 @@ def main() -> None:
     workdir_data = workdir / 'data'
     workdir_data.mkdir(exist_ok=True, parents=True)
 
-    artifact = find_artifact('image-data', commit)
+    artifact = find_artifact('build', 'image-data', commit, args.timeout)
     if not artifact:
         print(f'Could not find artifact for commit {commit}.')
         sys.exit(1)
