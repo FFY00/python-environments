@@ -78,6 +78,11 @@ def main() -> None:
     )
     images_group.add_argument('--rolling', action='store_true')
     parser.add_argument('--push', action='store_true')
+    images_group.add_argument(
+        '--build-path',
+        type=pathlib.Path,
+        default=containers.BUILD_PATH,
+    )
     args = parser.parse_args()
 
     if args.rolling:
@@ -85,8 +90,8 @@ def main() -> None:
     else:
         target_images = config.images[args.images]
 
-    srcdir = containers.BUILD_PATH / 'src'
-    logdir = containers.BUILD_PATH / 'logs'
+    srcdir = args.build_path / 'src'
+    logdir = args.build_path / 'logs'
     builder = Builder(target_images, config.repos, srcdir, logdir)
 
     print('Generating sources...')

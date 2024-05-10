@@ -11,6 +11,7 @@ build_containers_command = [py, '-m', 'containers.build']
 if get_option('push_containers')
     build_containers_command += ['--push']
 endif
+build_containers_command += ['--build-path', meson.source_root() / get_option('containers_build_path')]
 
 generate_data_deps = []
 if get_option('build_containers')
