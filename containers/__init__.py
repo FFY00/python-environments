@@ -23,10 +23,15 @@ from containers.template import Template  # noqa: E402
 
 with ROOT.joinpath('pyproject.toml').open('rb') as f:
     _pyproject_data = tomllib.load(f)
+_pyproject_version = _pyproject_data['project']['version']
 
-__version__ = _pyproject_data['project']['version']
-if commit := containers.env.get_commit():
-    __version__ += f'-{commit[:6]}'
+if desc := containers.env.Git.describe():
+    assert desc.startswith(_pyproject_version), f'{desc=}, {_pyproject_version=}'
+    __version__ = desc
+else:
+    __version__ = _pyproject_version
+    if commit := containers.env.Git.commit():
+        __version__ += f'-{commit[:6]}'
 
 
 BUILD_PATH = ROOT / 'containers' / 'out'

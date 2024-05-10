@@ -69,7 +69,7 @@ def main() -> None:
     parser.add_argument('--timeout', type=int, default=None)
     args = parser.parse_args()
 
-    commit = args.commit or containers.env.get_commit()
+    commit = args.commit or containers.env.Git.commit()
     if not commit:
         print('Must specify a commit.')
         sys.exit(1)
