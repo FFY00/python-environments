@@ -81,7 +81,7 @@ _REPORT_DATA = {
         'get_config_h_filename()',
         'get_makefile_filename()',
         '_get_preferred_schemes()',
-    ]
+    ],
 }
 
 _PLATFORM_SPECIFIC_DATA = {
