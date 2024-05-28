@@ -222,6 +222,9 @@ class _Encoder(json.JSONEncoder):
         )):
             return repr(o)
 
+        if hasattr(o, 'find_spec'):  # non-registered Finder
+            return repr(o)
+
         try:
             super().default(o)
         except TypeError:
