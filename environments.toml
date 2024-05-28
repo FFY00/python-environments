@@ -52,6 +52,26 @@ version = '40'
 template.name = 'fedora'
 
 [[images]]
+name = 'alpine'
+version = '3.17'
+template.name = 'alpine'
+
+[[images]]
+name = 'alpine'
+version = '3.18'
+template.name = 'alpine'
+
+[[images]]
+name = 'alpine'
+version = '3.19'
+template.name = 'alpine'
+
+[[images]]
+name = 'alpine'
+version = '3.20'
+template.name = 'alpine'
+
+[[images]]
 name = 'archlinux'
 version.type = 'rolling'
 template.name = 'archlinux'
