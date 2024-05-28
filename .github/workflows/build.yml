@@ -34,6 +34,8 @@ jobs:
           username:  python-environments+github_actions
           password: ${{ secrets.QUAY_IO_TOKEN }}
       - name: Push container images
+        run: docker push python-environments/archlinux
+      - name: Push container images
         run: python -m containers.build --push
       - name: Upload logs
         uses: actions/upload-artifact@v4
