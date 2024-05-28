@@ -148,7 +148,7 @@ class LookupWarning(Warning):
 def _is_expected_missing(item):  # type: (str) -> bool
     # TODO: versionadded
     for platform, items in _PLATFORM_SPECIFIC_DATA.items():
-        if platform != sys.platform and item in items:
+        if not sys.platform.startswith(platform) and item in items:
             return True
     return item in _OPTIONAL_DATA
 
