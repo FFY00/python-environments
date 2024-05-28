@@ -25,6 +25,31 @@ if False:  # TYPE_CHECKING
 
 
 _REPORT_DATA = {
+    'platform': [
+        'architecture()',
+        'machine()',
+        'node()',
+        'platform()',
+        'processor()',
+        'python_build()',
+        'python_compiler()',
+        'python_branch()',
+        'python_implementation()',
+        'python_revision()',
+        'python_version()',
+        'python_version_tuple()',
+        'release()',
+        'system()',
+        'version()',
+        'uname()',
+        'java_ver()',
+        'win32_ver()',
+        'win32_edition()',
+        'win32_is_iot()',
+        'mac_ver()',
+        'libc_ver()',
+        'freedesktop_os_release()',
+    ],
     'sys': [
         'api_version',
         'base_exec_prefix',
@@ -88,10 +113,22 @@ _PLATFORM_SPECIFIC_DATA = {
     'android': [
         'sys.getandroidapilevel()',
     ],
+    'darwin': [
+        'platform.libc_ver()',
+    ],
     'emscripten': [
         'sys._emscripten_info',
     ],
+    'java': [
+        'platform.java_ver()',
+    ],
+    'linux': [
+        'platform.libc_ver()',
+    ],
     'win32': [
+        'platform.win32_ver()',
+        'platform.win32_edition()',
+        'platform.win32_is_iot()',
         'sys.dllhandle',
         'sys.getwindowsversion()',
         'sys.winver',
